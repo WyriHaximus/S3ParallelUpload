@@ -1,0 +1,27 @@
+{
+    "name": "wyrihaximus/s3-parallel-upload",
+    "description": "Asyncronous upload to AWS S3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cees-Jan Kiewiet",
+            "email": "ceesjank@gmail.com",
+            "homepage": "http://wyrihaximus.net/"
+        }
+    ],
+    "require": {
+        "react/socket": "0.4.2",
+        "react/stream": "0.4.*",
+	    "aws/aws-sdk-php": "2.5.*",
+        "wyrihaximus/react-guzzle": "dev-master"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "~0.6",
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WyriHaximus\\S3ParallelUpload\\": "src/"
+        }
+    }
+}
