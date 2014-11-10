@@ -11,14 +11,10 @@ S3 upload tool using Guzzle and ReactPHP
 
 ## Installation ##
 
-Installation is easy with composer just add ReactGuzzle to your composer.json.
+Installation is easy with composer just run.
 
-```json
-{
-	"require": {
-		"wyrihaximus/s3-parallel-upload": "dev-master"
-	}
-}
+```sh
+composer require wyrihaximus/s3-parallel-upload
 ```
 
 ## Basic Usage ##
