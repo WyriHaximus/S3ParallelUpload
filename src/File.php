@@ -2,12 +2,14 @@
 
 namespace WyriHaximus\S3ParallelUpload;
 
+use React\Filesystem\Node;
+
 class File {
 
-    public function __construct($local, $remote, $size) {
+    public function __construct($local, $remote, Node\File $file) {
         $this->local = $local;
         $this->remote = $remote;
-        $this->size = $size;
+        $this->file = $file;
     }
 
     public function getLocal() {
@@ -18,8 +20,7 @@ class File {
         return $this->remote;
     }
 
-    public function getSize() {
-        return $this->size;
+    public function getFile() {
+        return $this->file;
     }
-
 }

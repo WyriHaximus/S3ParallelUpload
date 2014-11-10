@@ -1,4 +1,6 @@
 {
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "name": "wyrihaximus/s3-parallel-upload",
     "description": "Asyncronous upload to AWS S3",
     "license": "MIT",
@@ -9,11 +11,25 @@
             "homepage": "http://wyrihaximus.net/"
         }
     ],
+
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "react/filesystem",
+                "version": "dev",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/WyriHaximus/ReactFilesystem",
+                    "reference": "refs/heads/master"
+                }
+            }
+        }
+    ],
     "require": {
-        "react/socket": "0.4.2",
-        "react/stream": "0.4.*",
-	    "aws/aws-sdk-php": "2.5.*",
-        "wyrihaximus/react-guzzle": "dev-master"
+	    "aws/aws-sdk-php": "~3.0",
+        "wyrihaximus/react-guzzle-ring": "dev-master",
+        "react/filesystem": "*"
     },
     "require-dev": {
         "satooshi/php-coveralls": "~0.6",

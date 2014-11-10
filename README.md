@@ -28,36 +28,35 @@ Installation is easy with composer just add ReactGuzzle to your composer.json.
 
 require 'vendor/autoload.php';
 
-use Aws\Common\Credentials\Credentials;
+use Aws\Common\Aws;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use React\EventLoop\Factory as EventLoopFactory;
 use WyriHaximus\S3ParallelUpload\Uploader;
-use WyriHaximus\React\Guzzle\HttpClientAdapter;
+use WyriHaximus\React\RingPHP\HttpClientAdapter;
 
 $concurrentUploads = 13; // Number of async uploads
 $sourceDirectory = 'sea'; // The source directory
 $prefix = ''; // Filename prefix just in case
 $bucketName = 's3-bucket-name'; // The bucket we're uploading to
-$region = 'eu-west-1'; // The region the bucket resides in
-$credentials = new Credentials('YOUR', 'CREDENTIALS');
+$client = Aws::factory('/path/to/config.php')->get('s3');
+$logfile = 'stats.log'; // Statistical log file for analysis later on, set to null to disable
 
 $loop = EventLoopFactory::create();
 
 $guzzle = new Client([
-    'adapter' => new HttpClientAdapter($loop),
+    'handler' => new HttpClientAdapter($loop),
 ]);
 
-(new Uploader($credentials, $loop, $guzzle, [
+(new Uploader($client, $loop, $guzzle, [
     'concurrency' => $concurrentUploads,
     'base-dir' => $sourceDirectory,
     'prefix' => $prefix,
     'bucket' => $bucketName,
-    'region' => $region,
-]))->setup(new RecursiveIteratorIterator(
-    new RecursiveDirectoryIterator($sourceDirectory, RecursiveDirectoryIterator::SKIP_DOTS),
-    RecursiveIteratorIterator::LEAVES_ONLY
-));
+    'logfile' => $logfile,
+]))->setup()->then(function () {
+    echo 'Done', PHP_EOL;
+});
 
 $loop->run();
 ```
